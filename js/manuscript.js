@@ -5,8 +5,7 @@ var current_document = null;
 
 var documents = {
   "abcdefhgijklmnopqrstuvwxyz": {
-    "title": "Something",
-    "text": "ABCDEFGHI",
+    "text": "Something\nABCDEFGHI",
     "created": new Date(),
     "updated": new Date(),
   }
@@ -17,6 +16,20 @@ function format_date (date) {
   // Yes, it's an hack. But it works, so...
   var ISOString = date.toISOString();
   return ISOString.slice(0, 10) + " " + ISOString.slice(11, 16);
+}
+
+function get_title (uuid) {
+  var lines = documents[uuid].text.split("\n");
+  for (var i = 0; i < lines.length; i++) {
+    if (lines[i].trim())
+      return lines[i].trim();
+  }
+  return "(empty document)";
+}
+
+function delete_document(uuid) {
+  delete documents[uuid];
+  serialize_data();
 }
 
 function serialize_data () {
@@ -43,17 +56,21 @@ var views = {
     render: function () {
       $("#document-list").html("");
       for (var uuid in documents) {
-        var title = $("<td>" + documents[uuid].title + "</td>");
+        var title = $("<td>" + get_title(uuid) + "</td>");
         title.on("click", function(uuid) {
           return function (e) {
-            //TODO: open editor
+            current_document = uuid;
+            switch_view("document_editor");
           }
         }(uuid));
         var date = $("<td>" + format_date(documents[uuid].updated) + "</td>");
         var trash = $("<td>Del</td>");
         trash.on("click", function (uuid) {
           return function (e) {
-            //TODO: delete document
+            if (confirm("Do you really want to delete " + get_title(uuid) + "?")) {
+              delete_document(uuid);
+              views.document_list.render();
+            }
           }
         }(uuid));
         var row = $("<tr>")
