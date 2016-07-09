@@ -1,56 +1,56 @@
 html, body {
-	height: 100%;
-	font-family: "Libre Baskerville", serif;
+  height: 100%;
+  font-family: "Libre Baskerville", serif;
 }
 
 .full-height {
-	height: 100%;
+  height: 100%;
 }
 
 .full-width {
-	width: 100%;
+  width: 100%;
 }
 
 .min-full-width {
-	min-width: 100%;
+  min-width: 100%;
 }
 
 .text-full-width {
-	width: 100%;
-	min-width: 100%;
-	max-width: 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
 }
 
 .menu > button {
-	width: 100%;
+  width: 100%;
 }
 
 .button-square {
-	padding: 0;
-	width: 38px;
+  padding: 0;
+  width: 38px;
 }
 
 #column-title {
-	width: 65%;
+  width: 65%;
 }
 
 #column-date {
-	width: 30%;
+  width: 30%;
 }
 
 #column-delete {
-	width: 5%;
+  width: 5%;
 }
 
 #raw-data {
-	font-family: monospace;
+  font-family: monospace;
 }
 
 .flex-container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #document-edit, #document-preview, #raw-data {
-	flex-grow: 10;
+  flex-grow: 10;
 }

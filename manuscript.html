@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Manuscript</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,300,600" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/skeleton.css">
-	<link rel="stylesheet" href="css/manuscript.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<script type="text/javascript" src="js/zepto.min.js"></script>
-	<script type="text/javascript" src="js/marked.min.js"></script>
-	<script type="text/javascript" src="js/manuscript.js"></script>
+  <meta charset="utf-8">
+  <title>Manuscript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/manuscript.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <script type="text/javascript" src="js/zepto.min.js"></script>
+  <script type="text/javascript" src="js/marked.min.js"></script>
+  <script type="text/javascript" src="js/manuscript.js"></script>
 </head>
 <body>
-	<div class="container full-height">
-		<!-- Document list -->
-		<div id="document-list-view" class="row">
-			<div class="one-third column">
-				<h1>Manuscript</h1>
-				<div class="menu">
-					<p>Space occupied: <span id="space-occupied">0</span> bytes</p>
-					<button id="clear-all">Clear all</button>
-					<button id="import-export">Import/Export</button>
-					<button id="show-about">About</button>
-					<div id="about" style="display: none;">
-						<p>A simple markdown editor - powered by <a href="https://github.com/chjj/marked">marked</a> and <a href="http://zeptojs.com/">ZeptoJS</a>, styled by <a href="http://getskeleton.com/">Skeleton</a> and backed by localStorage.</p>
-					</div>
-				</div>
-			</div>
-			<div class="two-thirds column">
-				<div>
-					<div class="u-pull-right">
-						<button id="new-document" class="button-square"><i class="fa fa-plus"></i></button>
-					</div>
-					<div class="u-cf"></div>
-				</div>
-				<table class="full-width">
-					<thead>
-						<tr>
-							<th id="column-title">Title</th>
-							<th id="column-date">Date</th>
-							<th id="culumn-delete"></th>
-						</tr>
-					</thead>
-					<tbody id="document-list">
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!-- Document editor -->
-		<div id="document-editor-view" class="row full-height">
-			<div class="ten columns offset-by-one flex-container full-height">
-				<div>
-					<div class="u-pull-left">
-						<span id="word-count">0</span> word(s)
-					</div>
-					<div class="u-pull-right">
-						<button id="toggle-preview" class="button-square"><i class="fa fa-eye"></i></button>
-						<button id="close-document" class="button-square"><i class="fa fa-close"></i></button>
-					</div>
-					<div class="u-cf"></div>
-				</div>
-				<textarea id="document-edit" class="text-full-width"></textarea>
-				<div id="document-preview" style="display: none;"></div>
-			</div>
-		</div>
-		<!-- Import/export -->
-		<div id="import-export-view" class="row full-height">
-			<div class="ten columns offset-by-one flex-container full-height">
-				<h1>Import/Export data</h1>
-				<div>
-					<button id="import">Import</button>
-					<button id="export">Export</button>
-					<button id="go-back">Go back</button>
-				</div>
-				<textarea id="raw-data" class="text-full-width">
-				</textarea>
-			</div>
-		</div>
-	</div>
+  <div class="container full-height">
+    <!-- Document list -->
+    <div id="document-list-view" class="row">
+      <div class="one-third column">
+        <h1>Manuscript</h1>
+        <div class="menu">
+          <p>Space occupied: <span id="space-occupied">0</span> bytes</p>
+          <button id="clear-all">Clear all</button>
+          <button id="import-export">Import/Export</button>
+          <button id="show-about">About</button>
+          <div id="about" style="display: none;">
+            <p>A simple markdown editor - powered by <a href="https://github.com/chjj/marked">marked</a> and <a href="http://zeptojs.com/">ZeptoJS</a>, styled by <a href="http://getskeleton.com/">Skeleton</a> and backed by localStorage.</p>
+          </div>
+        </div>
+      </div>
+      <div class="two-thirds column">
+        <div>
+          <div class="u-pull-right">
+            <button id="new-document" class="button-square"><i class="fa fa-plus"></i></button>
+          </div>
+          <div class="u-cf"></div>
+        </div>
+        <table class="full-width">
+          <thead>
+            <tr>
+              <th id="column-title">Title</th>
+              <th id="column-date">Date</th>
+              <th id="culumn-delete"></th>
+            </tr>
+          </thead>
+          <tbody id="document-list">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Document editor -->
+    <div id="document-editor-view" class="row full-height">
+      <div class="ten columns offset-by-one flex-container full-height">
+        <div>
+          <div class="u-pull-left">
+            <span id="word-count">0</span> word(s)
+          </div>
+          <div class="u-pull-right">
+            <button id="toggle-preview" class="button-square"><i class="fa fa-eye"></i></button>
+            <button id="close-document" class="button-square"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="u-cf"></div>
+        </div>
+        <textarea id="document-edit" class="text-full-width"></textarea>
+        <div id="document-preview" style="display: none;"></div>
+      </div>
+    </div>
+    <!-- Import/export -->
+    <div id="import-export-view" class="row full-height">
+      <div class="ten columns offset-by-one flex-container full-height">
+        <h1>Import/Export data</h1>
+        <div>
+          <button id="import">Import</button>
+          <button id="export">Export</button>
+          <button id="go-back">Go back</button>
+        </div>
+        <textarea id="raw-data" class="text-full-width">
+        </textarea>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
