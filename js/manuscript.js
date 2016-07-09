@@ -173,7 +173,10 @@ var views = {
         //TODO
       });
       $("#export").on("click", function (e) {
-        //TODO
+        $("#raw-data")[0].value = JSON.stringify({
+          documents: documents,
+          current_document: current_document
+        });
       });
       $("#go-back").on("click", function (e) {
         switch_view("document_list");
