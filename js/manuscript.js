@@ -3,6 +3,22 @@
 var documents = {};
 var current_document = null;
 
+var documents = {
+  "abcdefhgijklmnopqrstuvwxyz": {
+    "title": "Something",
+    "text": "ABCDEFGHI",
+    "created": new Date(),
+    "updated": new Date(),
+  }
+}
+
+function format_date (date) {
+  // Formats a date as YYYY-MM-DD HH:MM
+  // Yes, it's an hack. But it works, so...
+  var ISOString = date.toISOString();
+  return ISOString.slice(0, 10) + " " + ISOString.slice(11, 16);
+}
+
 function serialize_data () {
   //TODO
 }
@@ -20,9 +36,32 @@ var views = {
       $("#import-export").on("click", function (e) {
         switch_view("import_export");
       });
+      $("#new-document").on("click", function (e) {
+        //TODO
+      });
     },
     render: function () {
-      //TODO
+      $("#document-list").html("");
+      for (var uuid in documents) {
+        var title = $("<td>" + documents[uuid].title + "</td>");
+        title.on("click", function(uuid) {
+          return function (e) {
+            //TODO: open editor
+          }
+        }(uuid));
+        var date = $("<td>" + format_date(documents[uuid].updated) + "</td>");
+        var trash = $("<td>Del</td>");
+        trash.on("click", function (uuid) {
+          return function (e) {
+            //TODO: delete document
+          }
+        }(uuid));
+        var row = $("<tr>")
+          .append(title)
+          .append(date)
+          .append(trash);
+        $("#document-list").append(row);
+      }
     }
   },
   document_editor: {
@@ -35,13 +74,13 @@ var views = {
   },
   import_export: {
     initialize: function () {
-      $("import").on("click", function (e) {
+      $("#import").on("click", function (e) {
         //TODO
       });
-      $("export").on("click", function (e) {
+      $("#export").on("click", function (e) {
         //TODO
       });
-      $("go-back").on("click", function (e) {
+      $("#go-back").on("click", function (e) {
         switch_view("document_list");
       });
     },
