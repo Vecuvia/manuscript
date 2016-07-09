@@ -170,7 +170,11 @@ var views = {
   import_export: {
     initialize: function () {
       $("#import").on("click", function (e) {
-        //TODO
+        if (confirm("Do you really want to import the content of the textarea? This will clobber your current documents.")) {
+          var data = JSON.parse($("#raw-data")[0].value) || {};
+          documents = data.documents || {};
+          current_document = data.current_document || null;
+        }
       });
       $("#export").on("click", function (e) {
         $("#raw-data")[0].value = JSON.stringify({
