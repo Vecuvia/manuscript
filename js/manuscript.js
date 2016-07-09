@@ -2,20 +2,27 @@
 
 var documents = {};
 var current_document = null;
-
-var documents = {
-  "abcdefhgijklmnopqrstuvwxyz": {
-    "text": "Something\nABCDEFGHI",
-    "created": new Date(),
-    "updated": new Date(),
-  }
-}
+var serialize_source = "manuscript_v_5";
 
 function format_date (date) {
   // Formats a date as YYYY-MM-DD HH:MM
   // Yes, it's an hack. But it works, so...
   var ISOString = date.toISOString();
   return ISOString.slice(0, 10) + " " + ISOString.slice(11, 16);
+}
+
+function generate_UUID(){
+  // see http://stackoverflow.com/a/8809472
+  var d = new Date().getTime();
+  if(window.performance && typeof window.performance.now === "function"){
+    d += performance.now(); //use high-precision timer if available
+  }
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = (d + Math.random()*16)%16 | 0;
+    d = Math.floor(d/16);
+    return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+  });
+  return uuid;
 }
 
 function get_title (uuid) {
@@ -27,17 +34,60 @@ function get_title (uuid) {
   return "(empty document)";
 }
 
-function delete_document(uuid) {
+function new_document () {
+  var uuid = generate_UUID();
+  documents[uuid] = {
+    text: "",
+    created: new Date(),
+    updated: new Date()
+  };
+  serialize_data();
+  return uuid;
+}
+
+function delete_document (uuid) {
   delete documents[uuid];
   serialize_data();
 }
 
-function serialize_data () {
+function nuke_storage () {
+  documents = {};
+  current_document = null;
+  localStorage.removeItem(serialize_source);
+}
+
+function save_current_document () {
+  documents[current_document].text = $("#document-edit")[0].value;
+  serialize_data();
+}
+
+function background_save () {
   //TODO
 }
 
-function deserialize_data () {
+function start_background_save () {
   //TODO
+}
+
+function stop_background_save () {
+  //TODO
+}
+
+function serialize_data () {
+  localStorage.setItem(serialize_source, JSON.stringify({
+    documents: documents,
+    current_document: current_document
+  }));
+}
+
+function deserialize_data () {
+  var data = JSON.parse(localStorage.getItem(serialize_source)) || {};
+  documents = data.documents || {};
+  current_document = data.current_document || null;
+  for (var uuid in documents) {
+    documents[uuid].created = new Date(documents[uuid].created);
+    documents[uuid].updated = new Date(documents[uuid].updated);
+  }
 }
 
 var views = {
@@ -50,7 +100,14 @@ var views = {
         switch_view("import_export");
       });
       $("#new-document").on("click", function (e) {
-        //TODO
+        current_document = new_document();
+        switch_view("document_editor");
+      });
+      $("#clear-all").on("click", function (e) {
+        if (confirm("Do you really want to delete every document from storage?")) {
+          nuke_storage();
+          views.document_list.render();
+        }
       });
     },
     render: function () {
@@ -83,7 +140,14 @@ var views = {
   },
   document_editor: {
     initialize: function () {
-      //TODO
+      $("#toggle-preview").on("click", function (e) {
+        //TODO: preview
+      });
+      $("#close-document").on("click", function (e) {
+        save_current_document();
+        stop_background_save();
+        switch_view("document_list");
+      });
     },
     render: function () {
       //TODO
