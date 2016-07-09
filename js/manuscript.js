@@ -3,6 +3,7 @@
 var documents = {};
 var current_document = null;
 var serialize_source = "manuscript_v_5";
+var background_thread = null;
 
 function format_date (date) {
   // Formats a date as YYYY-MM-DD HH:MM
@@ -23,6 +24,13 @@ function generate_UUID(){
     return (c=='x' ? r : (r&0x3|0x8)).toString(16);
   });
   return uuid;
+}
+
+function word_count (text) {
+  var words = text.trim().replace(/\s+/gi, ' ').split(' ');
+  if (words[0])
+    return words.length;
+  return 0;
 }
 
 function get_title (uuid) {
@@ -62,15 +70,16 @@ function save_current_document () {
 }
 
 function background_save () {
-  //TODO
+  save_current_document();
+  $("#word-count").html(word_count($("#document-edit")[0].value));
 }
 
 function start_background_save () {
-  //TODO
+  background_thread = setInterval(background_save, 250);
 }
 
 function stop_background_save () {
-  //TODO
+  clearInterval(background_thread);
 }
 
 function serialize_data () {
@@ -141,7 +150,9 @@ var views = {
   document_editor: {
     initialize: function () {
       $("#toggle-preview").on("click", function (e) {
-        //TODO: preview
+        $("#document-edit").toggle();
+        $("#document-preview").html(marked($("#document-edit")[0].value));
+        $("#document-preview").toggle();
       });
       $("#close-document").on("click", function (e) {
         save_current_document();
@@ -150,7 +161,10 @@ var views = {
       });
     },
     render: function () {
-      //TODO
+      var text = documents[current_document].text;
+      $("#document-edit")[0].value = text;
+      $("#document-preview").html(marked(text));
+      start_background_save();
     }
   },
   import_export: {
