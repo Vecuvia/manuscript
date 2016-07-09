@@ -44,3 +44,12 @@ html, body {
 #raw-data {
 	font-family: monospace;
 }
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+}
+
+#document-edit, #document-preview, #raw-data {
+	flex-grow: 10;
+}

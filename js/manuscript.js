@@ -64,9 +64,17 @@ function nuke_storage () {
   localStorage.removeItem(serialize_source);
 }
 
+function space_occupied () {
+  return (localStorage.getItem(serialize_source) || "").length;
+}
+
 function save_current_document () {
-  documents[current_document].text = $("#document-edit")[0].value;
-  serialize_data();
+  var new_text = $("#document-edit")[0].value;
+  if (documents[current_document].text !== new_text) {
+    documents[current_document].text = new_text;
+    documents[current_document].updated = new Date();
+    serialize_data();
+  }
 }
 
 function background_save () {
@@ -120,6 +128,7 @@ var views = {
       });
     },
     render: function () {
+      $("#space-occupied").html(space_occupied());
       $("#document-list").html("");
       for (var uuid in documents) {
         var title = $("<td>" + get_title(uuid) + "</td>");
