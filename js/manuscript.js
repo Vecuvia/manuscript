@@ -14,7 +14,12 @@ function deserialize_data () {
 var views = {
   document_list: {
     initialize: function () {
-      //TODO
+      $("#show-about").on("click", function (e) {
+        $("#about").toggle();
+      });
+      $("#import-export").on("click", function (e) {
+        switch_view("import_export");
+      });
     },
     render: function () {
       //TODO
@@ -30,7 +35,15 @@ var views = {
   },
   import_export: {
     initialize: function () {
-      //TODO
+      $("import").on("click", function (e) {
+        //TODO
+      });
+      $("export").on("click", function (e) {
+        //TODO
+      });
+      $("go-back").on("click", function (e) {
+        switch_view("document_list");
+      });
     },
     render: function () {
       //TODO
@@ -49,17 +62,22 @@ function render_views () {
   function selector_of (view) {
     return view.split("_").join("-") + "-view";
   }
+  //Hide all the views
   for (var view in views) {
     $("#" + selector_of(view)).hide();
   }
-  //Show current view
+  //Show and render current view
   $("#" + selector_of(current_view)).show();
   views[current_view].render();
+}
+
+function switch_view (view) {
+  current_view = view;
+  render_views();
 }
 
 window.onload = function () {
   initialize_views();
   deserialize_data();
-  current_view = "document_list";
-  render_views();
+  switch_view("document_list");
 };

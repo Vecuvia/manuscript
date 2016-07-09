@@ -2,10 +2,35 @@ html, body {
 	height: 100%;
 }
 
-full-height {
+.full-height {
 	height: 100%;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.min-full-width {
+	min-width: 100%;
 }
 
 .menu > button {
 	width: 100%;
+}
+
+.button-square {
+	padding: 0;
+	width: 38px;
+}
+
+#column-title {
+	width: 65%;
+}
+
+#column-date {
+	width: 30%;
+}
+
+#column-delete {
+	width: 5%;
 }

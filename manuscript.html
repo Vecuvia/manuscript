@@ -28,13 +28,41 @@
 				</div>
 			</div>
 			<div class="two-thirds column">
+				<div>
+					<div class="u-pull-right">
+						<button id="new-document" class="button-square">+</button>
+					</div>
+					<div class="u-cf"></div>
+				</div>
+				<table class="full-width">
+					<thead>
+						<tr>
+							<th id="column-title">Title</th>
+							<th id="column-date">Date</th>
+							<th id="culumn-delete"></th>
+						</tr>
+					</thead>
+					<tbody id="document-list">
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<!-- Document editor -->
 		<div id="document-editor-view" class="row">
+			<div class="ten columns offset-by-one">
+				<!-- TODO -->
+			</div>
 		</div>
 		<!-- Import/export -->
 		<div id="import-export-view" class="row">
+			<div class="ten columns offset-by-one">
+				<h1>Import/Export data</h1>
+				<textarea id="raw-data" class="full-width min-full-width">
+				</textarea>
+				<button id="import">Import</button>
+				<button id="export">Export</button>
+				<button id="go-back">Go back</button>
+			</div>
 		</div>
 	</div>
 </body>
