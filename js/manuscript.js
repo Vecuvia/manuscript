@@ -180,9 +180,9 @@ var views = {
     initialize: function () {
       $("#import").on("click", function (e) {
         if (confirm("Do you really want to import the content of the textarea? This will clobber your current documents.")) {
-          var data = JSON.parse($("#raw-data")[0].value) || {};
-          documents = data.documents || {};
-          current_document = data.current_document || null;
+          var data = $("#raw-data")[0].value;
+          localStorage.setItem(serialize_source, data);
+          deserialize_data();
         }
       });
       $("#export").on("click", function (e) {
