@@ -50,7 +50,18 @@
 		<!-- Document editor -->
 		<div id="document-editor-view" class="row">
 			<div class="ten columns offset-by-one">
-				<!-- TODO -->
+				<div>
+					<div class="u-pull-left">
+						<span id="word-count">0</span> word(s)
+					</div>
+					<div class="u-pull-right">
+						<button id="toggle-preview" class="button-square">P</button>
+						<button id="close-document" class="button-square">X</button>
+					</div>
+					<div class="u-cf"></div>
+				</div>
+				<textarea id="document-edit"></textarea>
+				<div id="document-preview" style="display: none;"></div>
 			</div>
 		</div>
 		<!-- Import/export -->
