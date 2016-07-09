@@ -13,13 +13,28 @@
 </head>
 <body>
 	<div class="container full-height">
-		<div class="row">
+		<!-- Document list -->
+		<div id="document-list-view" class="row">
 			<div class="one-third column">
 				<h1>Manuscript</h1>
-				<p></p>
+				<div class="menu">
+					<p>Space occupied: <span id="space-occupied">0</span> bytes</p>
+					<button id="clear-all">Clear all</button>
+					<button id="import-export">Import/Export</button>
+					<button id="show-about">About</button>
+					<div id="about" style="display: none;">
+						<p>A simple markdown editor.</p>
+					</div>
+				</div>
 			</div>
 			<div class="two-thirds column">
 			</div>
+		</div>
+		<!-- Document editor -->
+		<div id="document-editor-view" class="row">
+		</div>
+		<!-- Import/export -->
+		<div id="import-export-view" class="row">
 		</div>
 	</div>
 </body>
